@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model applicationTracker{
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String 
+  title       String
+  status      String
+  date        String
+  isCompleted Boolean   @default(false)
+  isImportant Boolean   @default(false)
+}

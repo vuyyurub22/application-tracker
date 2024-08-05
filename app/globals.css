@@ -17,13 +17,28 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #181818;
+  font-size: 17 px;
+  color: #fff;
+
+  height: 100vh;
+}
+
+input,
+textarea, 
+button{
+  border: none;
+  outline: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
 }
 
 @layer utilities {
