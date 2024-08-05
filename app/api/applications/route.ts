@@ -50,32 +50,3 @@ export async function GET(req: Request){
         console.log("Unable to get Job Application Trackers");
     }
 }
-
-export async function PUT(req: Request){
-    try{
-        const {userId} = auth();
-        const{isCompleted, id} = await req.json();
-        if(!userId){
-            return NextResponse.json({error:"Unauthorized", status: 401})
-        }
-        const application = await prisma.applicationTracker.update({
-            where :{
-                id,
-            },
-            data:{
-                isCompleted,
-            }
-        })
-        return NextResponse.json(application);
-    }catch(error){
-        console.log("Unable to update a Job Application Tracker");
-    }
-}
-
-export async function DELETE(req: Request){
-    try{
-
-    }catch(error){
-        console.log("Unable to Delete a Job Application Tracker");
-    }
-}
