@@ -22,7 +22,6 @@ export async function POST(req: Request){
                 status,
             },
         });
-        console.log(application);
         return NextResponse.json({application});
 
     }catch(error){
@@ -43,7 +42,6 @@ export async function GET(req: Request){
                 userId,
             },
         });
-        console.log("Application info: ",application);
         return NextResponse.json(application);
 
     }catch(error){
