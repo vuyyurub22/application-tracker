@@ -22,6 +22,7 @@ function Applications({title, applications,showAdd}:Props) {
       ) : (
         <>
           <h1>{title}</h1>
+          <h2 className="mt-2">{applications?.length} {applications.length===1? "application" : "applications"}</h2>
           <div className="display grid">
             {applications?.map((application) => (
               <ApplicationItem
