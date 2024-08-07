@@ -6,7 +6,7 @@ import Applications from '../Components/Applications/Applications';
 function page() {
   const {interviewApps} = useGlobalState();
   return (
-    <div><Applications title ="Ongoing Applications" applications = {interviewApps} showAdd={false}/></div>
+    <div><Applications title ="Interviews" applications = {interviewApps} showAdd={false}/></div>
   )
 }
 
