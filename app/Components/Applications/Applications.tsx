@@ -22,7 +22,7 @@ function Applications({title, applications,showAdd}:Props) {
       ) : (
         <>
           <h1>{title}</h1>
-          <h2 className="mt-2">{applications?.length} {applications.length===1? "application" : "applications"}</h2>
+          <h2 className="mt-3 text-xl">{applications?.length} {applications.length===1? "application" : "applications"}</h2>
           <div className="display grid">
             {applications?.map((application) => (
               <ApplicationItem
@@ -30,7 +30,7 @@ function Applications({title, applications,showAdd}:Props) {
                 title={application.title}
                 status={application.status}
                 date={application.date}
-                isCompleted={application.isCompleted}
+                isCompleted={application.completedStatus}
                 id={application.id}
               />
             ))}

@@ -15,6 +15,5 @@ model applicationTracker{
   title       String
   status      String
   date        String
-  isCompleted Boolean   @default(false)
-  isImportant Boolean   @default(false)
+  completedStatus Int    @default(0)
 }

@@ -43,18 +43,19 @@ export const GlobalProvider = ({children}) =>{
             console.log(error);
         }
     }
-    const updateApps = async(app) =>{
+    const updateApps = async(app,e) =>{
+        e.preventDefault();
         try{
             const response = await axios.put(`/api/applications`, app);
             console.log("Here");
-            getApplications();
+            getApplications(e);
         } catch(error){
             console.log(error);
         }
     }
 
-    const completedApps = applications.filter((app)=>app.isCompleted===true);
-    const incompleteApps = applications.filter((apps) => apps.isCompleted===false);
+    const incompleteApps = applications.filter((app)=>app.completedStatus===0);
+    const completedApps = applications.filter((apps) => apps.completedStatus===1 || apps.completedStatus===2);
     const interviewApps = applications.filter((apps)=>apps.status==="interview");
 
     useEffect(()=>{

@@ -11,7 +11,7 @@ interface Props{
   title: string;
   status: string;
   date: string;
-  isCompleted: boolean;
+  isCompleted: number;
   id: string;
 }
 
@@ -32,7 +32,6 @@ function ApplicationItem({title, status, date, isCompleted, id }: Props) {
           title1={title}
           status1={status}
           date1={date}
-          completed1={isCompleted}
           id1={id}
           closeModal={closeEditModal} // Pass down close function to close the modal
         />
@@ -40,37 +39,52 @@ function ApplicationItem({title, status, date, isCompleted, id }: Props) {
         <h1>{title}</h1>
         <p>Status: {status}</p>
         <p className="date">Started on: {formatDate(date)}</p>
-        <p>{isCompleted}</p>
         <div className="application-footer">
-        {isCompleted ? (
+        {isCompleted === 0 && (
           <button
-            className="completed"
-            onClick={() => {
+            className="ongoing"
+            onClick={(e) => {
               const app = {
                 id,
-                isCompleted: !isCompleted,
+                isCompleted,
               };
 
-              updateApps(app);
-            }}
-          >
-            Completed
-          </button>
-        ) : (
-          <button
-            className="incomplete"
-            onClick={() => {
-              const app = {
-                id,
-                isCompleted: !isCompleted,
-              };
-
-              updateApps(app);
+              updateApps(app,e);
             }}
           >
             Ongoing
           </button>
-        )}
+        )} 
+        {isCompleted === 1 && (
+          <button
+            className="offer"
+            onClick={(e) => {
+              const app = {
+                id,
+                isCompleted,
+              };
+
+              updateApps(app,e);
+            }}
+          >
+            Offer
+          </button>
+        )} 
+        {isCompleted === 2 && (
+          <button
+            className="rejected"
+            onClick={(e) => {
+              const app = {
+                id,
+                isCompleted,
+              };
+
+              updateApps(app,e);
+            }}
+          >
+            Rejected
+          </button>
+        )} 
             <button className="edit" onClick = {openEditModal}>
                 {edit}
             </button>
@@ -122,16 +136,20 @@ const ApplicationItemStyle = styled.div`
       margin-left: auto;
     }
 
-    .completed,
-    .incomplete {
+    .offer,
+    .ongoing,
+    .rejected {
       display: inline-block;
       padding: 0.4rem 1rem;
       background: ${(props) => props.theme.colorDanger};
       border-radius: 30px;
     }
 
-    .completed {
+    .offer{
       background: ${(props) => props.theme.colorGreenDark} !important;
+    }
+    .ongoing{
+      background: ${(props) => props.theme.colorOngoing};
     }
   }
 `;

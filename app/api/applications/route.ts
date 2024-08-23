@@ -8,7 +8,7 @@ export async function POST(req: Request){
         if(!userId){
             return NextResponse.json({error:"Unauthorized", status:401});
         }
-        const {title, status, date, completed, important} = await req.json(); 
+        const {title, status, date} = await req.json(); 
         if(!title|| !status||!date){
             return NextResponse.json({error:"Fill out all fields please"});
         }
@@ -16,8 +16,7 @@ export async function POST(req: Request){
             data: {
                 title,
                 date,
-                isCompleted: completed,
-                isImportant: important,
+                completedStatus: 0,
                 userId,
                 status,
             },
@@ -55,12 +54,15 @@ export async function PUT(req: Request){
         if(!userId){
             return NextResponse.json({error:"Unauthorized", status: 401})
         }
+        const completedStatus = (isCompleted+1)%3
+        console.log(isCompleted);
+        console.log(completedStatus);
         const application = await prisma.applicationTracker.update({
             where :{
                 id,
             },
             data:{
-                isCompleted,
+                completedStatus,
             }
         })
         return NextResponse.json(application);

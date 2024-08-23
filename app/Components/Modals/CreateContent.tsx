@@ -11,8 +11,6 @@ function CreateContent() {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("started application");
-  const [completed, setCompleted] = useState(false);
-  const [important, setImportant] = useState(false);
   const { theme, getApplications, closeModal } = useGlobalState();
 
   const handleChange = (name: string) => (e: any) => {
@@ -26,12 +24,6 @@ function CreateContent() {
       case "status":
         setStatus(e.target.value);
         break;
-      case "completed":
-        setCompleted(e.target.checked);
-        break;
-      case "important":
-        setImportant(e.target.checked);
-        break;
       default:
         break;
     }
@@ -39,7 +31,7 @@ function CreateContent() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const application = { title, date, status, completed, important };
+    const application = { title, date, status,};
     try {
       const response = await axios.post("/api/applications", application);
       if (response.data.error) {
@@ -90,26 +82,6 @@ function CreateContent() {
           type="date"
           name="date"
           id="date"
-        />
-      </div>
-      <div className="input-control toggler">
-        <label htmlFor="completed">Toggle Completed</label>
-        <input
-          checked={completed}
-          onChange={handleChange("completed")}
-          type="checkbox"
-          name="completed"
-          id="completed"
-        />
-      </div>
-      <div className="input-control toggler">
-        <label htmlFor="important">Toggle Important</label>
-        <input
-          checked={important}
-          onChange={handleChange("important")}
-          type="checkbox"
-          name="important"
-          id="important"
         />
       </div>
       <div className="submit-btn flex justify-end">

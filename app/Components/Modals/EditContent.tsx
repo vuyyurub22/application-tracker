@@ -12,17 +12,15 @@ interface Props{
     title1: string;
     status1: string;
     date1: string;
-    completed1: boolean;
     id1: string;
     closeModal: ()=>void;
   }
 
-function EditContent({title1, status1, date1, completed1, id1, closeModal }: Props) {
+function EditContent({title1, status1, date1, id1, closeModal }: Props) {
     const[title, setTitle] = useState(title1);
     const [date, setDate] = useState(date1);
     const [status, setStatus] = useState(status1);
-    const [completed, setCompleted] = useState(completed1);
-    const [important, setImportant] = useState(false);
+
     const {theme, getApplications,} = useGlobalState();
 
     const handleChange = (name: string) => (e: any) => {
@@ -36,19 +34,13 @@ function EditContent({title1, status1, date1, completed1, id1, closeModal }: Pro
           case "status":
             setStatus(e.target.value);
             break;
-          case "completed":
-            setCompleted(e.target.checked);
-            break;
-          case "important":
-            setImportant(e.target.checked);
-            break;
           default:
             break;
         }
       };
     const handleSubmit = async (e:any) =>{
         e.preventDefault();
-        const application = {title, status, date, completed, important};
+        const application = {title, status, date};
         try{
             const response = await axios.put(`/api/applications/${id1}`,application);
             if(response.data.error){
@@ -93,26 +85,6 @@ function EditContent({title1, status1, date1, completed1, id1, closeModal }: Pro
                     type="date"
                     name="date"
                     id="date"
-                    />
-                </div>
-                <div className ="input-control toggler">
-                    <label htmlFor="completed">Toggle Completed</label>
-                    <input
-                    value={completed.toString()}
-                    onChange={handleChange("completed")}
-                    type="checkbox"
-                    name="completed"
-                    id="completed"
-                    />
-                </div>
-                <div className="input-control toggler">
-                    <label htmlFor="important">Toggle Important</label>
-                    <input
-                    value={important.toString()}
-                    onChange={handleChange("important")}
-                    type="checkbox"
-                    name="important"
-                    id="important"
                     />
                 </div>
                 <div className="submit-btn flex justify-end">
