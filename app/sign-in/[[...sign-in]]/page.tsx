@@ -4,7 +4,7 @@ import { SignIn } from '@clerk/nextjs';
 
 function page() {
   return (
-    <div>
+    <div className="flex justify-center mt-16">
         <SignIn />
     </div>
 
