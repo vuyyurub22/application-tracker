@@ -38,8 +38,7 @@ export async function PUT(req:Request,{ params }: { params: { id: string } }){
                 title,
                 status,
                 date,
-                isCompleted: completed,
-                isImportant: important,
+                completedStatus: completed,
                 userId,
             }
         })
